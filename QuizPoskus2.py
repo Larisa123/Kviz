@@ -4,15 +4,14 @@ from tkinter import ttk
 LARGE_FONT = ("Verdana", 12)
 
 class Quiz(Tk):
-    #containerFrame = []
     frames = {}
     current_question_number = 0
+    points = 0
 
     def __init__(self, *args, **kwargs):
         Tk.__init__(self, *args, **kwargs)
 
-        container = Frame(self, height=50, width=90) # to je frame, ki nima na sebi nič, na njega zlagama nove
-        #self.containerFrame.append(container)
+        container = Frame(self, width=600, height=150) # to je frame, ki nima na sebi nič, na njega zlagama nove
         container.pack(side="top", fill="both", expand=True)
 
         #container.grid_rowconfigure(0, weight=1)
@@ -33,41 +32,81 @@ class Quiz(Tk):
             if frame != None:
                 print("Frame {} sem tkraisal".format(self.current_question_number))
                 frame.tkraise()
-            else: print("Frame {} ni v seznamu".format(self.current_question_number))
+            else: print("Nekaj se je zalomilo. Vprasanja {} ni bilo mogoče naložiti".format(self.current_question_number))
             self.current_question_number += 1
 
 class StartPage(Frame): # podeduje metode in lastnosti razreda
-    def __init__(self, parent, container):
-        Frame.__init__(self, parent) # klic, ki ga inicializira v starsevski razred
-        text = Text(parent, width=40, height=2, spacing1=15)
+    def __init__(self, parent, quiz_reference): #self je container - vse se bo nalagalo na container
+        Frame.__init__(self, parent)
+        self.contParent = parent # parent je container iz Quiza, self.parent je torej Frame (container je objekt tipa Frame)
+        self.quiz_reference = quiz_reference
+
+        self.show_frame()
+
+
+    def show_frame(self):
+        text = Text(self.contParent, font=LARGE_FONT)
         text.insert(INSERT, "Izberi področje:")
 
-        text.config(state=DISABLED) # uporabnik ne more spreminjati texta v text polju
+        text.config(state=DISABLED)  # uporabnik ne more spreminjati texta v text polju
         text.pack()
 
-        #container = Quiz.containerFrame[0]
-        buttonGeo = ttk.Button(parent, text="Geografija", command=Quiz.show_frame(Quiz)).pack(fill=X)
-        buttonMat = ttk.Button(parent, text="Matematika", command=Quiz.show_frame(Quiz)).pack(fill=X)
+        buttonGeo = ttk.Button(self.contParent, text="Geografija", command=self.quiz_reference.show_frame).pack(fill=X)
+        # buttonMat = ttk.Button(widgetMaster, text="Matematika", command=Quiz.show_frame).pack(fill=X)
 
 class Question(Frame):
-    def __init__(self, parent, container, number): #ko imama stevilko, poiscema vprasanje, odgovor in mozne odgovore iz datoteke
+    number = 0
+    question = ""
+    correct_answer = 0
+    possible_answers = []
+    chosen_answer = ""
+    is_confirm_button_showing = False
+
+
+    def __init__(self, parent, quiz_reference, number): #ko imama stevilko, poiscema vprasanje, odgovor in mozne odgovore iz datoteke
         Frame.__init__(self, parent)
+        self.contParent = parent
+        self.quiz_reference = quiz_reference
 
         # definirat morema kaj je vprasanje od objekta vprasanje, kaj so mozni odgovori in kaj pravilen odgovor
 
         self.number = number
         self.question = "Kako si?"
         self.correct_answer = "Vredu"
-        self.possible_answers = (self.question, "Vredu", "Slabo", "Utrujeno")
+        self.possible_answers = ["Vredu", "Slabo", "Utrujeno"]
 
+
+    def show_frame(self):
+        self.show_the_question()
+        self.show_possible_answers()
+
+    def show_the_question(self):
+        text = Text(self.contParent)
+        text.insert(INSERT, self.question)
+        text.pack()
+
+    def show_possible_answers(self):
+        var = StringVar()
         for possible_answer in self.possible_answers:
-            text = Text(parent, width=40, height=2, spacing1=15)
-            text.insert(INSERT, possible_answer)
+            R = Radiobutton(self.contParent, text=possible_answer, variable=var, value=possible_answer,
+                            command=lambda: self.set_chosen_answer(var))
+            # Ko uporabnik izbere odgovor, se mu prikaze gumb za potrditev,
+            # ko stisne nanj se preveri pravilnost izbire
+            R.pack()
 
-            text.config(state=DISABLED)  # uporabnik ne more spreminjati texta v text polju
-            text.pack()
+    def set_chosen_answer(self, selected_answer):
+        if self.is_confirm_button_showing == False: self.show_confirm_button()
+        self.chosen_answer = selected_answer
 
-        confirm_button = ttk.Button(self, text="Potrdi izbiro").pack(fill=X)
+    def show_confirm_button(self):
+        confirm_button = ttk.Button(self.contParent, text="Potrdi izbiro",
+                                    command=self.check_the_answer).pack(fill=X)
+        self.is_confirm_button_showing = True
+
+    def check_the_answer(self):
+        if self.chosen_answer == self.correct_answer: self.points += 1
+
+        #poklici show_frame da nalozi novo vprasanje
 
 app = Quiz()
 app.mainloop()
