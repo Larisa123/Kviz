@@ -5,13 +5,14 @@ LARGE_FONT = ("Verdana", 12)
 
 class Quiz(Tk):
     frames = {}
-    current_question_number = 0
+    numberOfQuestions = 3
+    current_question_number = 1
     points = 0
 
     def __init__(self, *args, **kwargs):
         Tk.__init__(self, *args, **kwargs)
 
-        container = Frame(self, width=600, height=150) # to je frame, ki nima na sebi nič, na njega zlagama nove
+        container = Frame(self) # to je frame, ki nima na sebi nič, na njega zlagama nove
         container.pack(side="top", fill="both", expand=True)
 
         #container.grid_rowconfigure(0, weight=1)
@@ -19,15 +20,15 @@ class Quiz(Tk):
 
         self.frames[0] = StartPage(container, self)
 
-        for i in range(1,11):
+        for i in range(1,self.numberOfQuestions+1):
             question = Question(container, self, i)
             self.frames[i] = question
-            #question.grid(row=0, column=0, sticky="nsew")
+            #question.grid(row=i, column=0, sticky="nsew")
 
         self.show_frame()
 
     def show_frame(self):
-        if self.current_question_number <= 10:
+        if self.current_question_number <= self.numberOfQuestions:
             frame = self.frames.get(self.current_question_number, None)
             if frame != None:
                 print("Frame {} sem tkraisal".format(self.current_question_number))
@@ -45,17 +46,18 @@ class StartPage(Frame): # podeduje metode in lastnosti razreda
 
 
     def show_frame(self):
-        text = Text(self.contParent, font=LARGE_FONT)
-        text.insert(INSERT, "Izberi področje:")
+        #text = Text(self.contParent)
+        #text.insert(INSERT, "Izberi področje:")
 
-        text.config(state=DISABLED)  # uporabnik ne more spreminjati texta v text polju
-        text.pack()
+        #text.config(state=DISABLED)  # uporabnik ne more spreminjati texta v text polju
+        #text.pack()
+
+        Label(self.contParent, text="Izberi področje:").pack(pady=15, padx=10)
 
         buttonGeo = ttk.Button(self.contParent, text="Geografija", command=self.quiz_reference.show_frame).pack(fill=X)
         # buttonMat = ttk.Button(widgetMaster, text="Matematika", command=Quiz.show_frame).pack(fill=X)
 
 class Question(Frame):
-    number = 0
     question = ""
     correct_answer = 0
     possible_answers = []
@@ -71,19 +73,16 @@ class Question(Frame):
         # definirat morema kaj je vprasanje od objekta vprasanje, kaj so mozni odgovori in kaj pravilen odgovor
 
         self.number = number
-        self.question = "Kako si?"
-        self.correct_answer = "Vredu"
-        self.possible_answers = ["Vredu", "Slabo", "Utrujeno"]
+        self.get_data()
 
+        self.show_frame()
 
     def show_frame(self):
         self.show_the_question()
         self.show_possible_answers()
 
     def show_the_question(self):
-        text = Text(self.contParent)
-        text.insert(INSERT, self.question)
-        text.pack()
+        Label(self.contParent, text=self.question).pack(pady=15, padx=10)
 
     def show_possible_answers(self):
         var = StringVar()
@@ -95,6 +94,7 @@ class Question(Frame):
             R.pack()
 
     def set_chosen_answer(self, selected_answer):
+        print(self.is_confirm_button_showing)
         if self.is_confirm_button_showing == False: self.show_confirm_button()
         self.chosen_answer = selected_answer
 
@@ -105,8 +105,20 @@ class Question(Frame):
 
     def check_the_answer(self):
         if self.chosen_answer == self.correct_answer: self.points += 1
-
+        self.quiz_reference.show_frame()
         #poklici show_frame da nalozi novo vprasanje
+
+    def get_data(self):
+        with open("data.txt", "r") as file:
+            lines = [line.strip() for line in file]
+            currentLine = lines[self.number]
+            # zapisano v obliki Vprasanje;odg1:odg2:odg3;odgovorPravilen
+            data = currentLine.split(";")
+            self.question = data[0]
+            self.correct_answer = data[2]
+            self.possible_answers = data[1].split(":");
+
+
 
 app = Quiz()
 app.mainloop()
