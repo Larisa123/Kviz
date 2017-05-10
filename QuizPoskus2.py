@@ -1,12 +1,14 @@
 from tkinter import *
 from tkinter import ttk
+import random
 
 LARGE_FONT = ("Verdana", 12)
 
 class Quiz(Tk):
     frames = {}
-    numberOfQuestions = 3
-    current_question_number = 1
+    number_of_questions = 3
+    question_count = 0
+    number_of_all_questions = 15 # per subject in data.txt
     points = 0
 
     def __init__(self, *args, **kwargs):
@@ -15,31 +17,44 @@ class Quiz(Tk):
         container = Frame(self) # to je frame, ki nima na sebi nič, na njega zlagama nove
         container.pack(side="top", fill="both", expand=True)
 
-        #container.grid_rowconfigure(0, weight=1)
-        #container.grid_columnconfigure(0, weight=1)
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
 
-        self.frames[0] = StartPage(container, self)
+        start_page = StartPage(container, self)
+        start_page.grid(row=0, column=0, sticky="nsew")
+        self.frames[0] = start_page
 
-        for i in range(1,self.numberOfQuestions+1):
-            question = Question(container, self, i)
-            self.frames[i] = question
-            #question.grid(row=i, column=0, sticky="nsew")
+        random_question_numbers = []
+        table_of_possible_question_numbers = list(range(1, self.number_of_all_questions+1)) #iti more od 1 do vkljucno stevila
+
+        while len(random_question_numbers) < self.number_of_questions:
+            rand_number = random.choice(table_of_possible_question_numbers)
+            random_question_numbers.append(rand_number)
+            if rand_number in table_of_possible_question_numbers:
+                table_of_possible_question_numbers.remove(rand_number)
+            else: print("Pri določanju tvojih vprašanj se je zalomilo.")
+
+
+        question_count = 1
+        for number in random_question_numbers:
+            question = Question(container, self, number)
+            self.frames[question_count] = question
+            question_count += 1
+            question.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame()
 
     def show_frame(self):
-        if self.current_question_number <= self.numberOfQuestions:
-            frame = self.frames.get(self.current_question_number, None)
-            if frame != None:
-                print("Frame {} sem tkraisal".format(self.current_question_number))
-                frame.tkraise()
+        if self.question_count <= self.number_of_questions:
+            frame = self.frames.get(self.question_count, None)
+            if frame != None: frame.tkraise() # naloži nov frame - vprašanje
             else: print("Nekaj se je zalomilo. Vprasanja {} ni bilo mogoče naložiti".format(self.current_question_number))
-            self.current_question_number += 1
+            self.question_count += 1
 
 class StartPage(Frame): # podeduje metode in lastnosti razreda
     def __init__(self, parent, quiz_reference): #self je container - vse se bo nalagalo na container
         Frame.__init__(self, parent)
-        self.contParent = parent # parent je container iz Quiza, self.parent je torej Frame (container je objekt tipa Frame)
+        self.contParent = self # parent je container iz Quiza, self.parent je torej Frame (container je objekt tipa Frame)
         self.quiz_reference = quiz_reference
 
         self.show_frame()
@@ -67,7 +82,7 @@ class Question(Frame):
 
     def __init__(self, parent, quiz_reference, number): #ko imama stevilko, poiscema vprasanje, odgovor in mozne odgovore iz datoteke
         Frame.__init__(self, parent)
-        self.contParent = parent
+        self.contParent = self
         self.quiz_reference = quiz_reference
 
         # definirat morema kaj je vprasanje od objekta vprasanje, kaj so mozni odgovori in kaj pravilen odgovor
