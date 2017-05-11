@@ -2,8 +2,6 @@ from tkinter import *
 from tkinter import ttk
 import random
 
-LARGE_FONT = ("Verdana", 12)
-
 class Quiz(Tk):
     frames = {}
     number_of_questions = 3
@@ -21,7 +19,8 @@ class Quiz(Tk):
         self.container = Frame(self)  # to je frame, ki nima na sebi nič, na njega zlagama nove
         self.container.pack(side="top", fill="both", expand=True)
 
-        self.container.grid_rowconfigure(0, weight=1) # poglej si kaj to pomeni!
+        self.container.grid_rowconfigure(0, weight=1)
+        # default weight je 0, kar pomeni da bo ta imel najvecji prostor ko spremenimo velikost - zaenkrat nima veze ker je sam
         self.container.grid_columnconfigure(0, weight=1)
 
     def initialize_start_page(self):
@@ -70,7 +69,15 @@ class Quiz(Tk):
         # ponastavimo rezultate, ce bo slucajno igral ponovno:
         self.question_count = 0
         self.points = 0
+        self.destroy_previous_frames() # da se nam spomin ne zabase
+
+    def destroy_previous_frames(self):
+        for frame in self.frames.values():
+            frame.destroy()
         self.frames = {}
+
+    def increase_points(self):
+        self.points += 1
 
 
 
@@ -117,7 +124,7 @@ class Question(Frame):
         var = StringVar()
         for possible_answer in self.possible_answers:
             R = Radiobutton(self, text=possible_answer, variable=var, value=possible_answer,
-                            command=lambda: self.set_chosen_answer(var))
+                            command=lambda: self.set_chosen_answer(var.get()))
             # Ko uporabnik izbere odgovor, se mu prikaze gumb za potrditev, ko stisne nanj se preveri pravilnost izbire
             R.pack()
 
@@ -131,7 +138,7 @@ class Question(Frame):
         self.is_confirm_button_showing = True
 
     def check_the_answer(self):
-        if self.chosen_answer == self.correct_answer: self.points += 1
+        if self.chosen_answer == self.correct_answer: self.quiz_reference.increase_points()
         self.quiz_reference.show_frame()
         #poklici show_frame da nalozi novo vprasanje
 
