@@ -162,9 +162,17 @@ class ResultPage(Frame):
         self.show_frame_widgets()
 
     def show_frame_widgets(self):
-        Label(self, text="Tvoj rezultat je: {} točk!".format(self.quiz_reference.points)).pack(pady=15, padx=10)
-        ttk.Button(self, text="Igraj ponovno!", command= self.quiz_reference.initialize_start_page).pack(fill=X)
+        Label(self, text="Tvoj rezultat je: {}/{} točk!".
+              format(self.quiz_reference.points, self.quiz_reference.number_of_questions)).pack(pady=15, padx=10)
 
+        # sporocilo glede na rezultat:
+        user_points = self.quiz_reference.points
+        all_points = self.quiz_reference.number_of_questions
+        if user_points in range(all_points//2+1, all_points//4): message = "Tvoje znanje je zadovoljivo."
+        else: message = "Bravo, tvoje znanje je izjemno!!!" if user_points == all_points else "Treba bo vaditi!"
+        Label(self, text=message).pack(pady=15, padx=10)
+
+        ttk.Button(self, text="Igraj ponovno!", command=self.quiz_reference.initialize_start_page).pack(fill=X)
 
 app = Quiz()
 app.mainloop()
