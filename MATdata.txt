@@ -1,0 +1,16 @@
+
+Vprasanje1?;ja:ne:mogoce;ja
+Vprasanje2?;ja:ne:mogoce;ja
+Vprasanje3?;ja:ne:mogoce;ja
+Vprasanje4?;ja:ne:mogoce;ja
+Vprasanje5?;ja:ne:mogoce;ja
+Vprasanje6?;ja:ne:mogoce;ja
+Vprasanje7?;ja:ne:mogoce;ja
+Vprasanje8?;ja:ne:mogoce;ja
+Vprasanje9?;ja:ne:mogoce;ja
+Vprasanje10?;ja:ne:mogoce;ja
+Vprasanje11?;ja:ne:mogoce;ja
+Vprasanje12?;ja:ne:mogoce;ja
+Vprasanje13?;ja:ne:mogoce;ja
+Vprasanje14?;ja:ne:mogoce;ja
+Vprasanje15?;ja:ne:mogoce;ja
