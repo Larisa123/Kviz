@@ -1,16 +1,22 @@
 
-Vprasanje1?;ja:ne:mogoce;ja
-Vprasanje2?;ja:ne:mogoce;ja
-Vprasanje3?;ja:ne:mogoce;ja
-Vprasanje4?;ja:ne:mogoce;ja
-Vprasanje5?;ja:ne:mogoce;ja
-Vprasanje6?;ja:ne:mogoce;ja
-Vprasanje7?;ja:ne:mogoce;ja
-Vprasanje8?;ja:ne:mogoce;ja
-Vprasanje9?;ja:ne:mogoce;ja
-Vprasanje10?;ja:ne:mogoce;ja
-Vprasanje11?;ja:ne:mogoce;ja
-Vprasanje12?;ja:ne:mogoce;ja
-Vprasanje13?;ja:ne:mogoce;ja
-Vprasanje14?;ja:ne:mogoce;ja
-Vprasanje15?;ja:ne:mogoce;ja
+Kaj je univerzalna množica?;je množica, ki je enolično določena in vsebuje vedno iste elemente:je množica vseh elementov, na katero se v danem primeru omejimo:je množica, na katero se omejimo, ko računamo primere iz vsakdanjosti;je množica vseh elementov, na katero se v danem primeru omejimo
+Kakšna je geometrijska definicija elipse?;je krožnica, ki ima obliko jajca:je množica točk ravnine, ki so horizontalno bolj oddaljene od izhodišča kot vertikalno:je množica točk ravnine, katerih vsota razdalj od izbranih dveh točk je stalna;je množica točk ravnine, katerih vsota razdalj od izbranih dveh točk je stalna
+Kaj je nedoločeni integral funkcije f?;je vsaka funkcija F, ki ni natanko določena, ko jo integriramo:je vsaka funkcija F, katere odvod je funkcija f:je vsaka funkcija F, katere integral je funkcija f;je vsaka funkcija F, katere odvod je funkcija f
+Katera realna števila so iracionalna?;so števila, ki imajo neskončen decimalni zapis, ki ni periodičen:so števila, ki imajo neskončen decimalni zapis, ki je periodičen:so števila, ki imajo končen decimalni zapis, ki ni periodičen;so števila, ki imajo neskončen decimalni zapis, ki ni periodičen
+Kaj je odvod funkcije f v dani točki?;je limita diferenčnega količnika te funkcije, ko gre sprememba neodvisne spremenljivke proti nič, če ta limita obstaja:je limita diferenčnega količnika te funkcije, ko gre sprememba neodvisne spremenljivke proti neskončno, če ta limita obstaja:je limita diferenčnega količnika te funkcije, ko gre sprememba odvisne spremenljivke proti nič, če ta limita obstaja;je limita diferenčnega količnika te funkcije, ko gre sprememba neodvisne spremenljivke proti nič, če ta limita obstaja
+Kdaj sta trikotnika skladna?;če ju lahko narišemo enega na drugega:če obstaja togi premik, ki en trikotnik preslika v zrcalno sliko drugega:če obstaja togi premik, ki en trikotnik preslika na drugega;če obstaja togi premik, ki en trikotnih preslika na drugega
+Kaj je krajevni vektor točke A?;je vektor od točke A do točke B:je vektor od izhodišča koordinatnega sistema do točke A:je vektor od izhodišča koordinatnega sistema do konca vektorja dolžine 1, ki ima prijemališče v točki A;je vektor od izhodišča koordinatnega sistema do točke A
+Kakšna je definicija funkcije cos(x) za poljuben x?;je ordinata točke, v kateri drugi krak kota seka en enotsko krožnico:je abscisa točke, v kateri drugi krak kota seka en enotsko krožnico:je koordinata točke, v kateri drugi krak kota seka en enotsko krožnico;je abscisa točke, v kateri drugi krak kota seka en enotsko krožnico
+Koliko diagonal ima konveksni n-kotnik?;n(n-2)/3:n(n-3)/2:n(n-1)/2;n(n-3)/2
+Kako upodobimo kompleksna števila v kompleksni ravnini?;kot točke ali kot krajevne vektorje v Einsteinovi ravnini:kot točke ali kot krajevne vektorje v Newtonovi ravnini:kot točke ali kot krajevne vektorje v Gaussovi ravnini;kot točke ali kot krajevne vektorje v Gaussovi ravnini
+Kaj je stacionarna točka?;je točka, v kateri prvi odvod funkcije zavzema konstantno vrednost:je točka, v kateri prvi odvod funkcije zavzema vrednost 0:je točka, ki se ne premika;je točka, v kateri prvi odvod funkcije zavzema vrednost 0
+Kaj je praštevilo?;je naravno število, ki ima točno enega delitelja, samega sebe:je naravno število, ki ima točno dva delitelja, samega sebe in število 1:je kompleksno število, ki ima točno dva delitelja, samega sebe in število 1;je naravno število, ki ima točno dva delitelja, samega sebe in število 1
+Kdaj uporabljamo sinusni izrek?;za računanje diagonal v trikotniku:za računanje stranic in kotov v trikotniku:samo za računanje kotov v trikotniku;za računanje stranic in kotov v trikotniku
+Kakšen je geometrijski pomen odvoda?;predstavlja smerni koeficient sekante na krivuljo v določeni točki:predstavlja začetno vrednost tangente na krivuljo v določeni točki:predstavlja smerni koeficient tangente na krivuljo v določeni točki;predstavlja smerni koeficient tangente na krivuljo v določeni točki
+Kaj je kombinatorično drevo?;je shematski prikaz poteka izbir oz. odločanja v različnih fazah:je shematski prikaz razvoja kombinatorike skozi zgodovino:je shematski prikaz računanja binomskih koeficientov;je shematski prikaz poteka izbir oz. odločanja v različnih fazah
+Kaj je najmanjši skupni večkratnik dveh celih števil?;je najmanjše število, ki je večkratnik enega izmed obeh števil:je najmanjše število, ki je večkratnik obeh števil hkrati:je najmanjše število, ki je večkratnik enega izmed števil in števila 7;je najmanjše število, ki je večkratnih obeh števil hkrati
+Kakšen je razlog za vpeljavo kompleksnih števil?;da lahko rešimo kvadratne enačbe z negativno diskriminanto in da lahko računamo sode korene negativnih števil:da si zakompliciramo računanje:da lahko rešimo enačbe pete stopnje in računamo sode korene negativnih števil;da lahko rešimo kvadratne enačbe z negativno diskriminanto in da lahko računamo sode korene negativnih števil
+Koliko je 2/0?;0:ni definirano:2;ni definirano
+Kaj je nasprotni dogodek?;je dogodek, ki se zgodi,če se dani dogodek tudi zgodi:je dogodek, ki se zgodi,če se dani dogodek ne zgodi:je dogodek, ki se zgodi in se hkrati ne zgodi;je dogodek, ki se zgodi,če se dani dogodek ne zgodi
+Kakšna je definicija skalarnega produkta dveh vektorjev a in b?;je realno število, ki je enako produktu dolžine vektorja a in pravokotne projekcije vektorja b na smer vektorja a:je vektor, ki je enak produktu dolžine vektorja a in pravokotne projekcije vektorja b na smer vektorja a:je realno število, ki je enako produktu dolžin vektorjev a in b;je realno število, ki je enako produktu dolžine vektorja a in pravokotne projekcije vektorja b na smer vektorja a
+

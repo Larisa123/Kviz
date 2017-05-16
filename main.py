@@ -2,22 +2,49 @@ from tkinter import *
 from tkinter import ttk
 import random
 
+button_width = 17
+number_of_characters_per_row = 55
+diff_for_answers = 8
+
+
+#import mp3play
+
+#def play_sound(sound):
+#    f = mp3play.load(sound)
+#    f.play()
+
+import gettext
+_ = gettext.gettext
+
+try:
+    en = gettext.translation('main', localedir='locale', languages=['en'])
+    en.install()
+except: print(_("Prevedba v angleski jezik ni bila mogoca."))
+
+#rdeco, zeleno+ gumb
+#potrdi na desni
+#radio buttons na levi, besedilo na sredini
+#slikica - neke z knjigami
+
+
 class Quiz(Tk):
     frames = {}
-    number_of_questions = 3
+    number_of_questions = 5
     question_count = 0
-    number_of_all_questions = 15 # per subject in SUBJECTdata.txt
+    number_of_all_questions = 20 # per subject in SUBJECTdata.txt
     points = 0 # number of points user gets for answering the question correctly
 
     def __init__(self, *args, **kwargs):
         Tk.__init__(self, *args, **kwargs)
+        Tk.wm_title(self, _("Maturitetni kviz"))
 
         self.initialize_container_frame()
         self.initialize_start_page()
 
     def initialize_container_frame(self):
         self.container = Frame(self)  # to je frame, ki nima na sebi nič, na njega zlagama nove
-        self.container.pack(side="top", fill="both", expand=True)
+        self.container.pack_propagate(0)
+        self.container.pack(pady=10, padx=10)
 
         self.container.grid_rowconfigure(0, weight=1)
         # default weight je 0, kar pomeni da bo ta imel najvecji prostor ko spremenimo velikost - zaenkrat nima veze ker je sam
@@ -33,7 +60,7 @@ class Quiz(Tk):
         if self.question_count <= self.number_of_questions:
             frame = self.frames.get(self.question_count, None) # da slucajno ne pride do zrusitve programa
             if frame != None: frame.tkraise() # naloži nov frame - vprašanje
-            else: print("Nekaj se je zalomilo. Vprasanja {} ni bilo mogoče naložiti".format(self.current_question_number))
+            else: print(_("Nekaj se je zalomilo. Vprasanja ni bilo mogoče naložiti"))
             self.question_count += 1
         else: self.show_result_frame()
 
@@ -49,9 +76,10 @@ class Quiz(Tk):
         while len(random_question_numbers) < self.number_of_questions:
             rand_number = random.choice(table_of_possible_question_numbers)
             random_question_numbers.append(rand_number)
+            print(rand_number)
 
             if rand_number in table_of_possible_question_numbers: table_of_possible_question_numbers.remove(rand_number)
-            else: print("Pri določanju tvojih vprašanj se je zalomilo.") # spet da slucajno ne pride do zrusitve
+            else: print(_("Pri določanju tvojih vprašanj se je zalomilo.")) # spet da slucajno ne pride do zrusitve
 
         # nalozimo dejanska vprasanja, prikazemo zaenkrat se nobenega:
         question_count = 1 # to ni lastnost metode self.question_count, ampak nova spremenljivka
@@ -89,10 +117,19 @@ class StartPage(Frame): # podeduje metode in lastnosti razreda
         self.show_frame()
 
     def show_frame(self):
-        Label(self, text="Izberi področje:").pack(pady=15, padx=10)
+        text = _('''Pozdravljen bodoči maturant!\nPred tabo je kratek kviz iz maturitetnih predmetov''')
+        Label(self, text=text).pack(padx=10)
 
-        buttonGeo = ttk.Button(self, text="Geografija", command= lambda: self.quiz_reference.set_subject("GEO")).pack(fill=X)
-        buttonMat = ttk.Button(self, text="Matematika", command= lambda: self.quiz_reference.set_subject("MAT")).pack(fill=X)
+        Label(self, text=_("Izberi področje:")).pack(pady=15, padx=10)
+
+        buttonGeo = ttk.Button(self, text=_("Geografija"),
+                               command= lambda: self.quiz_reference.set_subject("GEO"),
+                               width=button_width)
+        buttonGeo.pack(side="bottom")
+        buttonMat = ttk.Button(self, text=_("Matematika"),
+                               command= lambda: self.quiz_reference.set_subject("MAT"),
+                               width=button_width)
+        buttonMat.pack(side="bottom")
         # lambda uporabimo, da lahko podamo parameter in ob tem ne sprožimo klica funkcije
 
 
@@ -118,11 +155,31 @@ class Question(Frame):
         self.show_possible_answers()
 
     def show_the_question(self):
-        Label(self, text=self.question).pack(pady=15, padx=10)
+        '''prikaze vprasanje na label widgetu'''
+        edited_text = self.check_if_text_too_long(self.question, number_of_characters_per_row)
+
+        Label(self, text=edited_text).pack(pady=15, padx=10, side="top")
+
+    def check_if_text_too_long(self, unedited_text, allowed_number_of_chars):
+        '''vrne primerno preurejen text z novimi vrsticami, ce je predolg'''
+        if len(unedited_text) <= number_of_characters_per_row: return unedited_text # je ze ok
+
+        text = '''''' # vecvrsticni komentar
+        num_of_chars = 0  # in current row
+
+        for word in unedited_text.split(" "):
+            num_of_chars += len(word)
+            if num_of_chars < allowed_number_of_chars:
+                text += word + " "
+            else:
+                text = text + word + "\n"
+                num_of_chars = 0
+        return text.strip("\n")
 
     def show_possible_answers(self):
         var = StringVar()
         for possible_answer in self.possible_answers:
+            possible_answer = self.check_if_text_too_long(possible_answer, number_of_characters_per_row - diff_for_answers)
             R = Radiobutton(self, text=possible_answer, variable=var, value=possible_answer,
                             command=lambda: self.set_chosen_answer(var.get()))
             # Ko uporabnik izbere odgovor, se mu prikaze gumb za potrditev, ko stisne nanj se preveri pravilnost izbire
@@ -134,7 +191,9 @@ class Question(Frame):
 
     def show_confirm_button(self):
         confirm_button = ttk.Button(self, text="Potrdi izbiro",
-                                    command=self.check_the_answer).pack(fill=X)
+                                    command=self.check_the_answer,
+                                    width=button_width)
+        confirm_button.pack(pady=8, side="bottom")
         self.is_confirm_button_showing = True
 
     def check_the_answer(self):
@@ -152,7 +211,7 @@ class Question(Frame):
             data = currentLine.split(";")
             self.question = data[0]
             self.correct_answer = data[2]
-            self.possible_answers = data[1].split(":");
+            self.possible_answers = data[1].split(":")
 
 
 class ResultPage(Frame):
@@ -165,14 +224,29 @@ class ResultPage(Frame):
         Label(self, text="Tvoj rezultat je: {}/{} točk!".
               format(self.quiz_reference.points, self.quiz_reference.number_of_questions)).pack(pady=15, padx=10)
 
-        # sporocilo glede na rezultat:
-        user_points = self.quiz_reference.points
-        all_points = self.quiz_reference.number_of_questions
-        if user_points in range(all_points//2+1, all_points//4): message = "Tvoje znanje je zadovoljivo."
-        else: message = "Bravo, tvoje znanje je izjemno!!!" if user_points == all_points else "Treba bo vaditi!"
-        Label(self, text=message).pack(pady=15, padx=10)
+        text_message = self.appropriate_message(self.quiz_reference.points)
+        Label(self, text=text_message).pack(pady=15, padx=10)
 
-        ttk.Button(self, text="Igraj ponovno!", command=self.quiz_reference.initialize_start_page).pack(fill=X)
+        ttk.Button(self, text="Igraj ponovno!",
+                   command=self.quiz_reference.initialize_start_page,
+                   width=button_width).pack(side="bottom")
+
+    def appropriate_message(self, user_points):
+        """Prikaze sporocilo glede na rezultat"""
+        all_points = self.quiz_reference.number_of_questions
+        if user_points in range(all_points // 2 + 1):
+            message = "Tvoje znanje je nezadostno!"
+        elif user_points in range(all_points // 2 + 1, all_points // 4):
+            message = "Tvoje znanje je zadovoljivo."
+        elif user_points in range(all_points // 4, all_points):
+            message = "Čestitam, dosegel si skoraj vse točke!"
+        else:
+            message = "Bravo, tvoje znanje je izjemno!!!"  # dosegel je vse točke
+        return message
+
 
 app = Quiz()
+app.geometry("500x250") # velikost okna - to ni resitev, jaz hocem nastavit velikost vseh framov, ne samo okna
+app.resizable(0, 0) # v nobeno smer ni resizable
 app.mainloop()
+

@@ -1,16 +1,21 @@
 
-Vprasanje1g?;ja:ne:mogoce;ja
-Vprasanje2g?;ja:ne:mogoce;ja
-Vprasanje3g?;ja:ne:mogoce;ja
-Vprasanje4g?;ja:ne:mogoce;ja
-Vprasanje5g?;ja:ne:mogoce;ja
-Vprasanje6g?;ja:ne:mogoce;ja
-Vprasanje7g?;ja:ne:mogoce;ja
-Vprasanje8g?;ja:ne:mogoce;ja
-Vprasanje9g?;ja:ne:mogoce;ja
-Vprasanje10g?;ja:ne:mogoce;ja
-Vprasanje11g?;ja:ne:mogoce;ja
-Vprasanje12g?;ja:ne:mogoce;ja
-Vprasanje13g?;ja:ne:mogoce;ja
-Vprasanje14g?;ja:ne:mogoce;ja
-Vprasanje15g?;ja:ne:mogoce;ja
+Kateri pojmi predstavljajo podnebne dejavnike?;relief, geografska širina, morski tokovi:veter, geografska širina, morski tokovi:relief, geografska širina, temperatura;relief, geografska širina, morski tokovi
+Velike afriške reke se na poti proti morju s slapovi in brzicami prebijejo čez pragove na robu celine. Kateri dve našteti gospodarski posledici sta pozitivnega značaja?;razvoj kovinske industrije, ustanovitev podjetij, ki stekleničijo pitno vodo:razvoj kovaštva, turizma:hidroenergetski potencial, turizem;hidroenergetski potencial, turizem
+Katera je oblika podzemne vode, ki je najpomembnejša za kmetijstvo suhih in polsuhih območij Avstralije?;aboriginska voda:arteška ali ujeta talna voda:avstralska voda;arteška ali ujeta talna voda
+Katera sta dva možna vzroka za visoko stopnjo urbanizacije megalopolisa?;lega v notranjosti celine, visoka stopnja izobrazbe prvotnih priseljencev:lega v notranjosti celine, dobre kmetijske možnosti:lega ob Atlantiku, hiter razvoj industrije;lega ob Atlantiku, hiter razvoj industrije
+Katera izmed naštetih značilnosti velja za Latinsko Ameriko?;na obrobju živijo potomci nekdanjih sužnjev:na obrobju živijo otroci revnejših slojev:na obrobju živijo revnejši sloji;na obrobju živijo revnejši sloji
+Kakšen je eden izmed vplivov geografske širine na redko poselitev Avstralije?;zaradi lege ob ekvatorju prevladujejo puščave:zaradi lege ob povratniku prevladujejo monsuni:zaradi lege ob povratniku prevladujejo puščave;zaradi lege ob povratniku prevladujejo puščave
+Kateri kamnini prevladujeta v Skandinavskem gorovju?;apnenec, granit:granit, peščenjak:granit, gnajs;granit, gnajs
+V katerem geološkem obdobju so nastali Ardeni?starejši paleozoik:mlajši paleozoik:kenozoik;mlajši paleozoik
+Na območju katerih dveh podenebnih tipov v naravnem okolju živijo severni jeleni?;tundrsko, polarno:tundrsko, zmerno hladno:zmerno hladno, kontinentalno polsuho;tundrsko, zmerno hladno
+Katera dva našteta družbena dejavnika vplivata na visok hektarski donos na Nizozemskem in Danskem?;visoka stopnja mehanizacije, donosnejše sorte rastlin:krščanska vera, kultura:kultura, donosnejše sorte rastlin;visoka stopnja mehanizacije, donosnejše sorte rastlin
+Kateri fosilni energijski vir najbolj onesnažuje ozračje?;premog:uran:nafta;premog
+Za katero prst v Sloveniji je značilno, da nastane na silikatni podlagi?;za distrične rjave prsti:za evtrične rjave prsti:za obe vrsti prsti;za distrične rjave prsti
+Katera naravna nesreča v Sloveniji ima največji vpliv na ekološko funkcijo gozda?;poplave:suše:požari;požari
+Kateri je sektor dejavnosti, v katerega spadata promet in turizem?;terciarni:primarni:sekundarni;terciarni
+Čez kateri prelaz se po avtocesti peljete od Ljubljane do Kopra?;Vršič:Postojnska vrata:Črnivec;Postojnska vrata
+Kako se v Sloveniji imenuje krak avtocestnega križa, ki poteka od JZ proti SV?;Slovenika:Ilirika:Slovenka;Slovenika
+Kateri sta dve izmed prednosti slovenske turistične ponudbe v primerjavi s hrvaško turistično ponudbo?;morje, smučišča:smučišča, reke:smučišča, kraški turizem;smučišča, kraški turizem
+Za katero pokrajino v Sloveniji veljajo naslednji opisi: alpska smer slemenitve, nižji in dolomitni vzhodni del, vinogradništvo ob vznožju hribovja?;Gorjanci:Krimsko višavje:Nanos;Gorjanci
+Katera reka v Sloveniji teče skozi Ravne na Koroškem?;Drava:Meža:Kotulja;Meža
+Katera industrijska panoga je bila po 2. svetovni vojni najpomembnejša v Ravnah na Koroškem?;železarstvo:steklarstvo:kovinska industrija;železarstvo
