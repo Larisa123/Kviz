@@ -140,7 +140,7 @@ class StartPage(ttk.Frame):  # podeduje metode in lastnosti razreda
 
         self.show_image()
 
-        ttk.Label(self, text=_("Izberi področje:")).pack(pady=15, padx=10)
+        ttk.Label(self, text=_("Izberi področje:")).pack(pady=10, padx=10)
 
         button_geo = ttk.Button(self, text=_("Geografija"),
                                command=lambda: self.quiz_reference.set_subject("GEO"),
@@ -206,23 +206,22 @@ class Question(ttk.Frame):
 
     def show_possible_answers(self):
         self.radio_buttons = {}
-        var = StringVar()
+        self.var = StringVar()
         for possible_answer in self.possible_answers:
             possible_answer = self.check_if_text_too_long(possible_answer,
                                                           number_of_characters_per_row - diff_for_answers)
             R = ttk.Radiobutton(self,
                                 compound="left",
                                 text=possible_answer,
-                                variable=var,
+                                variable=self.var,
                                 value=possible_answer,
-                                command=lambda: self.set_chosen_answer(var.get()))
+                                command=self.set_chosen_answer)
             # Ko uporabnik izbere odgovor, se mu prikaze gumb za potrditev, ko stisne nanj se preveri pravilnost izbire
             self.radio_buttons[possible_answer] = R
             R.pack(anchor='w')
 
-    def set_chosen_answer(self, selected_answer):
+    def set_chosen_answer(self):
         if not self.is_confirm_button_showing: self.show_confirm_button()
-        self.chosen_answer = selected_answer
 
     def show_confirm_button(self):
         self.confirm_button = ttk.Button(self, text=_("Potrdi izbiro"),
@@ -253,6 +252,7 @@ class Question(ttk.Frame):
         self.quiz_reference.show_frame()
 
     def check_the_answer(self):
+        self.chosen_answer = self.var.get()
         if self.chosen_answer == self.correct_answer: self.quiz_reference.increase_points()
         self.change_text_on_confirm_button()
         play_button_click()
